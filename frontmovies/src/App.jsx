@@ -6,6 +6,7 @@ function App() {
   const [movies,setMovies] = useState([]);
 
 
+
   const getMovies = async() =>{
     const url = `http://localhost:3000/movies`;
     const res = await fetch(url);
@@ -13,6 +14,7 @@ function App() {
     return mov.movies;
 
   }
+ 
 
  
  useEffect(() =>{
@@ -25,21 +27,22 @@ function App() {
     fecthMovies();
 
   }, [])
-const levantarDatos = ()=>
-{
+  const handleMovieClick = (movie) => {
 
-}
+    console.log(movie.title);
+  }
 
 
   return (
     
     <div className='cars'>
+      
         {
           movies.map(mov => (
-            <article key={mov.id} className="card" onClick={}>
+            <article key={mov.id} className="card" onClick={() => handleMovieClick(mov)}>
           {" "}
           <header>
-            <h1>{mov.title}</h1>
+            <h1 className='title'>{mov.title}</h1>
           </header>
           <picture>
             <img src={mov.poster} className="poster" />
@@ -54,6 +57,8 @@ const levantarDatos = ()=>
         </article>
           ))
         }
+         
+      
   </div>
 
 
