@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Get, HttpStatus, Param, Res } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 
 @Controller('movies')
@@ -16,6 +16,6 @@ getAllMovies()
 @Get(':id')
 getMoviesxId(@Param('id')id:string)
 {
-    return this.moviesService.getMoviexId(id);
+  return this.moviesService.getMoviexId(id);
 }
 }
