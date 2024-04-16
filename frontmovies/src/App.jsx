@@ -1,11 +1,19 @@
 import { useState,useEffect } from 'react'
-
+import Modal from './modal';
 
 
 function App() {
   const [movies,setMovies] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [movieActual,setMovieActual] = useState();
 
+  const openModal = () => {
+    setIsOpen(true);
+  };
 
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   const getMovies = async() =>{
     const url = `http://localhost:3000/movies`;
@@ -29,7 +37,9 @@ function App() {
   }, [])
   const handleMovieClick = (movie) => {
 
-    console.log(movie.title);
+    setMovieActual(movie);
+    openModal();
+
   }
 
 
@@ -47,20 +57,20 @@ function App() {
           <picture>
             <img src={mov.poster} className="poster" />
           </picture>
-          <section className="section">
-            <p>Año de lanzamiento: {mov.year}</p>
-            <p>Director: {mov.director}</p>
-            <p>Duración: {mov.duration} minutos</p>
-            <p>Género: {mov.genre.join(", ")}</p>
-            <p>Valoración: {mov.rate}/10:estrella:</p>
-          </section>
+          
         </article>
           ))
         }
-         
+        <div className="app-container">
+      <Modal isOpen={isOpen} onClose={closeModal} movie={movieActual}>
+
+      </Modal>
+    </div>
+        
+      
       
   </div>
-
+  
 
   )
  
